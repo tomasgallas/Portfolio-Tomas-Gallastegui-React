@@ -26,7 +26,7 @@ function ChatAssistant() {
     }
   }, [messages, isOpen]);
 
-    const handleSendMessage = async (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
@@ -36,18 +36,18 @@ function ChatAssistant() {
     setInput('');
     setIsLoading(true);
 
-    const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
-    const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+    // 👇 Ahora llamamos a nuestro propio proxy local
+    const API_URL = "/api/chat";
 
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${GROQ_API_KEY}`,
+          // 👈 ¡Ya no enviamos Authorization desde el navegador!
         },
         body: JSON.stringify({
-          model: 'allam-2-7b', // 👈 El modelo que te funcionó impecable
+          model: 'allam-2-7b',
           messages: [
             { role: 'system', content: portfolioKnowledge },
             ...messages
@@ -55,8 +55,8 @@ function ChatAssistant() {
               .map((m) => ({ role: m.role, content: m.content })),
             userMessage
           ],
-          temperature: 0.4,
-          max_tokens: 200,
+          temperature: 0.6,
+          max_tokens: 300,
         }),
       });
 
