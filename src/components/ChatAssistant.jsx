@@ -73,7 +73,7 @@ function ChatAssistant({ t }) {
             ...messages
               .filter((m, index) => index > 0 && !m.content.startsWith("⚠️"))
               .map((m) => ({ role: m.role, content: m.content })),
-            userMessage
+            { role: 'user', content: userMessage.content }
           ],
           temperature: 0.6,
           max_tokens: 300,
