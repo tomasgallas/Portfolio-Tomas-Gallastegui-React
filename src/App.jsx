@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css';
 import { translations } from './data/translations';
 
@@ -12,9 +12,16 @@ import Footer from './components/Footer';
 import ChatAssistant from './components/ChatAssistant';
 
 function App() {
-  // Estado global de idioma ('en' por defecto)
   const [lang, setLang] = useState('en');
   const t = translations[lang];
+
+  // 👈 Sincronizamos el idioma del HTML y el título de la pestaña
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.title = lang === 'es'
+      ? 'Tomás Gallastegui — Desarrollador Web Full-Stack'
+      : 'Tomás Gallastegui — Full-Stack Web Developer';
+  }, [lang]);
 
   return (
     <>

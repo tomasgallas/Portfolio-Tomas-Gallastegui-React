@@ -1,19 +1,42 @@
 // src/components/Contact.jsx
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 function Contact({ t }) {
   const [copied, setCopied] = useState(false);
+  const timerRef = useRef(null);
+
   const email = "gallasteguitomase@gmail.com";
   const linkedinUrl = "https://www.linkedin.com/in/tomas-gallastegui-90a373342/";
   const githubUrl = "https://github.com/tomasgallas";
   const cvUrl = "https://tomasgallas.github.io/CurriculumVitae-GallasteguiTomas/";
 
-  const handleCopyEmail = (e) => {
+  // Cleanup del temporizador para evitar fugas de memoria
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const handleCopyEmail = async (e) => {
     e.preventDefault();
-    navigator.clipboard.writeText(email).then(() => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        // Fallback para navegadores antiguos o entornos no seguros
+        const textArea = document.createElement("textarea");
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Error al copiar email:", err);
+    }
   };
 
   return (
@@ -47,4 +70,5 @@ function Contact({ t }) {
     </section>
   );
 }
+
 export default Contact;

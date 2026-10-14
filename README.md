@@ -22,8 +22,8 @@ Portfolio personal desarrollado en React y Vite con soporte para dos idiomas (Es
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/tomasgallas/portfolio-react.git
-cd portfolio-react
+git clone https://github.com/tomasgallas/Portfolio-Tomas-Gallastegui-React.git
+  cd Portfolio-Tomas-Gallastegui-React
 ```
 
 2. Instalar dependencias:

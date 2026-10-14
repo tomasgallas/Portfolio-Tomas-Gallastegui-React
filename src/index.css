@@ -26,6 +26,12 @@ body {
   margin: 0;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 h1,
 h2,
 h3,
@@ -201,9 +207,9 @@ header li a:hover {
 
 #hero .cta-button {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
-  color: #fff;
+  color:  #0d1117;
   background-color: var(--color-primary);
   padding: 0.8rem 2rem;
   border-radius: 8px;
@@ -214,6 +220,7 @@ header li a:hover {
 
 #hero .cta-button:hover {
   background-color: transparent;
+  color: var(--color-primary);
   border-color: var(--color-primary);
   box-shadow: 0 0 15px 0px var(--color-primary);
 }
@@ -300,10 +307,10 @@ header li a:hover {
 .project-card .tags li {
   font-size: 0.75rem;
   background-color: var(--color-primary);
-  color: #fff;
+  color:#0d1117;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .project-card .links {
   display: flex;
@@ -744,7 +751,8 @@ header li a:hover {
 .chat-bubble.user {
   align-self: flex-end;
   background-color: var(--color-primary);
-  color: #fff;
+  color: #0d1117;
+  font-weight: 500;
   border-bottom-right-radius: 2px;
 }
 
@@ -769,7 +777,11 @@ header li a:hover {
   padding: 8px 12px;
   color: #f0f6fc;
   font-size: 0.9rem;
-  outline: none;
+}
+.chat-input-form input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
 }
 
 .chat-input-form input:focus {
@@ -821,5 +833,14 @@ header li a:hover {
   .chat-window {
     width: calc(100vw - 30px);
     height: 420px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

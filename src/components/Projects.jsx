@@ -1,17 +1,19 @@
 // src/components/Projects.jsx
 import ProjectCard from './ProjectCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, A11y } from 'swiper/modules'; // 👈 Importamos A11y
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/a11y'; // 👈 Estilos accesibles de Swiper
 
 function Projects({ t }) {
   return (
     <section id="proyectos">
       <h2 className="fade-in-up">{t.title}</h2>
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, A11y]} // 👈 Agregamos A11y
+        a11y={{ enabled: true }}
         spaceBetween={30}
         slidesPerView={1}
         navigation
@@ -41,4 +43,5 @@ function Projects({ t }) {
     </section>
   );
 }
+
 export default Projects;

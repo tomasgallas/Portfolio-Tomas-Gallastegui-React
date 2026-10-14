@@ -1,11 +1,20 @@
 // src/components/ProjectCard.jsx
 
-function ProjectCard({ title, description, imgSrc, tags = [], demoUrl, repoUrl }) {
+function ProjectCard({ 
+  title, 
+  description, 
+  imgSrc, 
+  tags = [], 
+  demoUrl, 
+  repoUrl,
+  liveText = "Live Demo", // 👈 Recibimos las props traducidas con valor por defecto
+  codeText = "View Code" 
+}) {
   return (
     <article className="project-card">
       <img 
         src={imgSrc} 
-        alt={`Screenshot of ${title} project`} 
+        alt={`${title} project preview`} 
         loading="lazy" 
       />
       
@@ -13,23 +22,21 @@ function ProjectCard({ title, description, imgSrc, tags = [], demoUrl, repoUrl }
         <h3>{title}</h3>
         <p>{description}</p>
         
-        {/* Renderizado de los tags del proyecto */}
         <ul className="tags">
           {tags.map((tag) => (
             <li key={tag}>{tag}</li>
           ))}
         </ul>
         
-        {/* Renderizado condicional de los enlaces */}
         <div className="links">
           {demoUrl && (
             <a href={demoUrl} target="_blank" rel="noopener noreferrer">
-              Live Demo
+              {liveText}
             </a>
           )}
           {repoUrl && (
             <a href={repoUrl} target="_blank" rel="noopener noreferrer">
-              View Code
+              {codeText}
             </a>
           )}
         </div>
